@@ -65,8 +65,8 @@ class Worker:
     async def main(self):
         await self.startup()
         try:
-            stores = await self.store_service.get_list_stores()
             while True:
+                stores = await self.store_service.get_list_stores()
                 for row in stores:
                     if row['id'] % self.total != self.index:
                         continue
