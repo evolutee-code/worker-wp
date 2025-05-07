@@ -1,0 +1,18 @@
+[Unit]
+Description=Round Robin Worker B
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/worker-wp
+ExecStart=/home/worker-wp/.venv/bin/python /home/worker-wp/worker.py
+Restart=always
+RestartSec=5s
+Environment=PYTHONUNBUFFERED=1
+Environment=WORKER_INDEX=1
+Environment=WORKER_TOTAL=2
+StandardOutput=append:/var/log/worker-wp/worker-b.log
+StandardError=append:/var/log/worker-wp/worker-b-error.log
+
+[Install]
+WantedBy=multi-user.target
